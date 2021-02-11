@@ -8,6 +8,8 @@ HOW_LONG := 100
 
 If WinExist("ahk_class R6Game") {
   WinActivate
+  ; make sure the mouse buttons are not swapped, as this wont work if it is
+  DllCall("SwapMouseButton",int,false) ;
   Send {lbutton down}
   Sleep, %HOW_LONG%
   Send {lbutton up}
