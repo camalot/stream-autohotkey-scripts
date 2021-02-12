@@ -4,7 +4,13 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-HOW_LONG := 5 * 1000
+LPARAM = %1%
+
+if not LPARAM {
+  LPARAM = 5 ; DEFAULT HOW_LONG if not set
+}
+
+HOW_LONG := %LPARAM% * 1000
 
 If WinExist("ahk_class R6Game") {
   WinActivate
