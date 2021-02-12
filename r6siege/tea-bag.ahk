@@ -15,8 +15,9 @@ If WinExist("ahk_class R6Game") {
   WinActivate
   Loop, %LOOP_COUNT% {
     Send, {c down}
-    Sleep, 150
+    Sleep, 30
     Send, {c up}
+    Sleep, 100
   }
 }
 ExitApp

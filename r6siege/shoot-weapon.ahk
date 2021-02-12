@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 LPARAM = %1%
 
 if not LPARAM {
-  LPARAM = 100 ; DEFAULT HOW_LONG if not set (in milliseconds)
+  LPARAM = 60 ; DEFAULT HOW_LONG if not set (in milliseconds)
 }
 
 HOW_LONG := LPARAM
