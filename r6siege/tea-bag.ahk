@@ -20,4 +20,15 @@ If WinExist("ahk_class R6Game") {
     Sleep, 100
   }
 }
+
+If WinExist("ahk_exe DeadByDaylight.exe") {
+  WinActivate
+  Loop, %LOOP_COUNT% {
+    Send, {z down}
+    Sleep, 30
+    Send, {z up}
+    Sleep, 100
+  }
+}
+
 ExitApp
