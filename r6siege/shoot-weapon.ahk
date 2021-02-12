@@ -10,7 +10,7 @@ if not LPARAM {
   LPARAM = 100 ; DEFAULT HOW_LONG if not set (in milliseconds)
 }
 
-HOW_LONG := %LPARAM%
+HOW_LONG := LPARAM
 
 If WinExist("ahk_class R6Game") {
   WinActivate

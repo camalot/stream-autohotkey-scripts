@@ -9,13 +9,12 @@ LPARAM = %1%
 if not LPARAM {
   LPARAM = 5 ; DEFAULT HOW_LONG if not set
 }
-
-HOW_LONG := %LPARAM% * 1000
+HOW_LONG := LPARAM * 1000 ;
 
 If WinExist("ahk_class R6Game") {
   WinActivate
   Send, {LShift down}
-  Sleep %HOW_LONG%
+  Sleep, %HOW_LONG%
   Send, {LShift up}
 }
 ExitApp
