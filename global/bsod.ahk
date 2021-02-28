@@ -10,9 +10,9 @@ if not LPARAM {
 HOW_LONG := LPARAM * 1000 ;
 
 ; Settings:
-width:=1920														; Width of picture.
+width:=1920														  ; Width of picture.
 height:=1080														; Height of picture.
-pictureNames:=["./bsod.png"]	; Pictures names, put them in the same folder as this script
+pictureNames:=["./bsod.png"]	          ; Pictures names, put them in the same folder as this script
 
 pictureNamesLen := pictureNames.Length()
 Random, choice, 1, %pictureNamesLen% ;
@@ -21,7 +21,6 @@ Random, choice, 1, %pictureNamesLen% ;
 Gui, -caption -ToolWindow +HWNDguiID +AlwaysOnTop
 Gui, add, picture, x0 y0 w%width% h%height% hwndPic, % pictureNames[choice]
 Gui, Show, hide x0 y0 w%width% h%height%
-
 
 Gui, show
 Sleep, %HOW_LONG%
