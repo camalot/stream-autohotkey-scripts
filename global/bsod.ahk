@@ -5,14 +5,16 @@ SetWorkingDir, %A_ScriptDir%
 LPARAM = %1%
 
 if not LPARAM {
-  LPARAM = 15 ; DEFAULT HOW_LONG if not set
+  LPARAM = 10 ; DEFAULT HOW_LONG if not set
 }
 HOW_LONG := LPARAM * 1000 ;
 
+SysGet, Primary, MonitorPrimary
+SysGet, Mon, Monitor, %Primary%
 ; Settings:
-width:=1920														  ; Width of picture.
-height:=1080														; Height of picture.
-pictureNames:=["./bsod.png"]	          ; Pictures names, put them in the same folder as this script
+width:=MonRight        ; Width of picture.
+height:=MonBottom      ; Height of picture.
+pictureNames:=["./bsod.png"]	      ; Pictures names, put them in the same folder as this script
 
 pictureNamesLen := pictureNames.Length()
 Random, choice, 1, %pictureNamesLen% ;
