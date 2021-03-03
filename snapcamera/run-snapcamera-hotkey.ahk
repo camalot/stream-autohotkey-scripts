@@ -13,12 +13,14 @@ if not LPARAM {
 HOW_LONG := LPARAM * 1000
 
 ; The total number of filters
-MAX_FILTERS = 16
+MAX_FILTERS = 30
 
 DEFAULT_HK = !
 MODIFIER_HK =
 
 ; These are the FKeys used for the hotkeys F13-F22
+; I dont use F23-F24 because they are used for discord
+
 Keys := [13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
 KeyLen := Keys.Length()
@@ -26,10 +28,16 @@ Random, choice, 1, %MAX_FILTERS%
 ; currently supports up to 20 filters
 ; 10 with ! modifier
 ; 10 with !+ modifiers
+; 10 with !+^ modifiers
 if  (choice > Keys.Length())
 {
-  MODIFIER_HK = +
   choice := choice - Keys.Length()
+  if (choice <= Keys.Length() ) {
+    MODIFIER_HK = + ;
+  } else {
+    choice := choice - Keys.Length()
+    MODIFIER_HK = +^
+  }
 }
 
 key := Keys[choice]

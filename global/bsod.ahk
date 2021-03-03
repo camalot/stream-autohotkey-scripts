@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 LPARAM = %1%
 
 if not LPARAM {
-  LPARAM = 10 ; DEFAULT HOW_LONG if not set
+  LPARAM = 15 ; DEFAULT HOW_LONG if not set
 }
 HOW_LONG := LPARAM * 1000 ;
 
