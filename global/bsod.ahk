@@ -3,16 +3,19 @@ SendMode Input
 SetWorkingDir, %A_ScriptDir%
 
 LPARAM = %1%
-URL := "https://twitch.tv/products/darthminos"
+URLS := ["https://twitch.tv/products/darthminos", "https://dixper.gg/darthminos"]
 STOP_CODES := ["Y0UV3_B33N_PWN3D", "CHAT_NOT_HYPE_ENOUGH", "NEED_MOAR_POGCHAMPS"]
-
+EMOJIS := [";)", ":(", ":`(", "o.O"]
 if not LPARAM {
   LPARAM = 15 ; DEFAULT HOW_LONG if not set
 }
 HOW_LONG := LPARAM * 1000 ;
-
-Random, SCChoice, 1, STOP_CODES.Length()
-STOP_CODE := % STOP_CODES[SCChoice]
+Random, EMOJI_CHOICE, 1, EMOJIS.Length()
+Random, STOP_CODE_CHOICE, 1, STOP_CODES.Length()
+Random, URL_CHOICE, 1, URLS.Length()
+URL := % URLS[URL_CHOICE]
+STOP_CODE := % STOP_CODES[STOP_CODE_CHOICE]
+EMOJI := % EMOJIS[EMOJI_CHOICE]
 
 SysGet, Primary, MonitorPrimary
 SysGet, Mon, Monitor, %Primary%
@@ -31,10 +34,12 @@ Gui, -caption -ToolWindow +HWNDguiID +AlwaysOnTop
 Gui, add, picture, x0 y0 w%width% h%height% hwndPic, % pictureNames[choice]
 Gui, add, picture, x205 y697 w120 h120 hwndPic, % f
 
-Gui, Font, s16 cWhite w900, Arial
-Gui, Add, Text, x855 y698 BackgroundTrans, %URL%
-Gui, Font, s14 cWhite w900, Arial
-Gui, Add, Text, x418 y798 BackgroundTrans, %STOP_CODE%
+Gui, Font, s156 cWhite w500, Segoe UI 
+Gui, Add, Text, x190 y108 BackgroundTrans, %EMOJI%
+Gui, Font, s16 cWhite w900, Segoe UI 
+Gui, Add, Text, x855 y693 BackgroundTrans, %URL%
+Gui, Font, s14 cWhite w900, Segoe UI 
+Gui, Add, Text, x418 y795 BackgroundTrans, %STOP_CODE%
 Gui, Font, norm
 Gui, Show, hide x0 y0 w%width% h%height%
 
