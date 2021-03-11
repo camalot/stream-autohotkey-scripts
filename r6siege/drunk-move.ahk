@@ -15,7 +15,8 @@ if not LPARAM {
 HOW_LONG := LPARAM * 1000 ;
 REMAIN_TIME = 0 ;
 ; If WinExist("ahk_exe notepad2.exe") {
-If WinExist("ahk_class R6Game") {
+If WinExist("ahk_class R6Game") 
+    or WinExist("ahk_exe RogueCompany.exe") {
   WinActivate
   Loop {
     Random, choice, 1, %KeyLen% ;

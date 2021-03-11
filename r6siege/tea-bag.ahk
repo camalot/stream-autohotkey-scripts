@@ -21,6 +21,17 @@ If WinExist("ahk_class R6Game") {
   }
 }
 
+; MsgBox, %LOOP_COUNT%
+If WinExist("ahk_exe RogueCompany.exe") {
+  WinActivate
+  Loop, %LOOP_COUNT% {
+    Send, {LControl down}
+    Sleep, 30
+    Send, {LControl up}
+    Sleep, 100
+  }
+}
+
 If WinExist("ahk_exe DeadByDaylight.exe") {
   WinActivate
   Loop, %LOOP_COUNT% {

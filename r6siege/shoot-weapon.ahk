@@ -12,7 +12,7 @@ if not LPARAM {
 
 HOW_LONG := LPARAM
 
-If WinExist("ahk_class R6Game") {
+If WinExist("ahk_class R6Game") or WinExist("ahk_exe RogueCompany.exe"){
   WinActivate
   ; make sure the mouse buttons are not swapped, as this wont work if it is
   DllCall("SwapMouseButton",int,false) ;
