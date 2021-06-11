@@ -22,8 +22,10 @@ If WinExist("ahk_class R6Game") {
 }
 
 ; MsgBox, %LOOP_COUNT%
-If WinExist("ahk_exe RogueCompany.exe") 
-  or WinExist("ahk_exe HuntGame.exe") {
+If WinExist("ahk_class R6Game") 
+   or WinExist("ahk_exe RogueCompany.exe")
+   or WinExist("ahk_exe HuntGame.exe") 
+   or WinExists("ahk_exe Game.exe") {
   WinActivate
   Loop, %LOOP_COUNT% {
     Send, {LControl down}
