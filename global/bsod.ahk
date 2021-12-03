@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 LPARAM = %1% ; argument that can be passed for the length to show
 
 ;;; Settings ;;;
-URLS := ["https://twitch.tv/products/darthminos", "https://dixper.gg/darthminos"] ;
+URLS := ["https://twitch.tv/products/darthminos", "https://dixper.gg/darthminos", "http://shop.darthminos.tv"] ;
 STOP_CODES := ["Y0UV3_B33N_PWN3D", "CHAT_NOT_HYPE_ENOUGH", "NEED_MOAR_POGCHAMPS"] ;
 EMOJIS := [";)", ":(", ":`(", "o.O"] ;
 DEFAULT_SHOW_LENGTH = 15 ;
@@ -27,6 +27,7 @@ SysGet, Mon, Monitor, %Primary% ; Get the monitor info for the primary monitor
 
 width:=MonRight        ; Width of picture and window.
 height:=MonBottom      ; Height of picture and window.
+
 pictureNamesLen := pictureNames.Length()
 Random, choice, 1, %pictureNamesLen% ; A random image from pictureNames
 escapedURL := UrlEncode(URL) ; The url encoded url for creating the qr code
@@ -35,15 +36,31 @@ UrlDownloadToFile, https://api.qrserver.com/v1/create-qr-code/?size=120x120&colo
 
 ;;; Creates the overlay ;;;
 Gui, -caption -ToolWindow +HWNDguiID +AlwaysOnTop ; define the window
-Gui, add, picture, x0 y0 w%width% h%height% hwndPic, % pictureNames[choice] ; add the background
-Gui, add, picture, x205 y697 w120 h120 hwndPic, % f ; position and add the qr code
+Gui, Color, 0078d7 ; define the color of the window
+
+ileft:=MonLeft+width/2-(1920/2) ; left position of the window
+itop:=MonTop+height/2-(1080/2) ; top position of the window
+
+Gui, add, picture, x%ileft% y%itop% w1920 h1080 hwndPic, % pictureNames[choice] ; add the background
+qleft:=ileft+205 ;
+qtop:=itop+697 ;
+Gui, add, picture, x%qleft% y%qtop% w120 h120 hwndPic, % f ; position and add the qr code
 
 Gui, Font, s156 cWhite w500, Segoe UI ; Set the emoji font
-Gui, Add, Text, x190 y108 BackgroundTrans, %EMOJI% ; Add the emoji text
+etop:=itop+108 ;
+eleft:=ileft+190 ;
+
+Gui, Add, Text, x%eleft% y%etop% BackgroundTrans, %EMOJI% ; Add the emoji text
 Gui, Font, s16 cWhite w900, Segoe UI ; set the url font
-Gui, Add, Text, x855 y693 BackgroundTrans, %URL% ; add the url text
+utop:=itop+693 ;
+uleft:=ileft+855 ;
+Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %URL% ; add the url text
+
 Gui, Font, s14 cWhite w900, Segoe UI ; set the stop code font
-Gui, Add, Text, x418 y795 BackgroundTrans, %STOP_CODE% ; add the font code
+stop:=itop+795 ;
+sleft:=ileft+418 ;
+Gui, Add, Text, x%sleft% y%stop% BackgroundTrans, %STOP_CODE% ; add the font code
+
 Gui, Font, norm ; reset the fonts
 Gui, Show, hide x0 y0 w%width% h%height% ; size the window
 
