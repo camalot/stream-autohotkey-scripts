@@ -11,6 +11,13 @@ EMOJIS := [";)", ":(", ":`(", "o.O"] ;
 DEFAULT_SHOW_LENGTH = 15 ;
 pictureNames:=["./bsod.png"] ; Pictures names, put them in the same folder as this script
 
+PROB_MSG := "Your PC ran into a problem and needs to restart. We're `njust collecting some error info, and then we'll restart for `nyou." ;
+MORE_INFO := "For more information about this issue and possible fixes, visit"
+SUPPORT_MSG := "If you call a support person, give them this info:"
+STOP_CODE_MSG := "Stop Code:"
+TEXT_COLOR := "White" ;
+BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E"] ;
+
 if not LPARAM {
   LPARAM := DEFAULT_SHOW_LENGTH ; DEFAULT HOW_LONG if not set
 }
@@ -18,6 +25,8 @@ HOW_LONG := LPARAM * 1000 ; set the length in seconds
 Random, EMOJI_CHOICE, 1, EMOJIS.Length() ; get a random index for the emoji
 Random, STOP_CODE_CHOICE, 1, STOP_CODES.Length() ; get a random index for the stop codes
 Random, URL_CHOICE, 1, URLS.Length() ; get a random index for the url
+Random, BSODC_CHOICE, 1, BSOD_COLORS.Length() ; get a random index for the bsod colors
+BSOD_COLOR := BSOD_COLORS[BSODC_CHOICE] ; get the color
 URL := % URLS[URL_CHOICE] ; the random url
 STOP_CODE := % STOP_CODES[STOP_CODE_CHOICE] ; the random stop code
 EMOJI := % EMOJIS[EMOJI_CHOICE] ; The random emoji
@@ -32,33 +41,64 @@ pictureNamesLen := pictureNames.Length()
 Random, choice, 1, %pictureNamesLen% ; A random image from pictureNames
 escapedURL := UrlEncode(URL) ; The url encoded url for creating the qr code
 ; download the qr code so we can use it on the window
-UrlDownloadToFile, https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=0078d7&bgcolor=ffffff&data=%escapedURL%&margin=5, % f := A_Temp "\bsod_qr" ;
+UrlDownloadToFile, https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=%BSOD_COLOR%&bgcolor=%TEXT_COLOR%&data=%escapedURL%&margin=5, % f := A_Temp "\bsod_qr" ;
 
 ;;; Creates the overlay ;;;
 Gui, -caption -ToolWindow +HWNDguiID +AlwaysOnTop ; define the window
-Gui, Color, 0078d7 ; define the color of the window
+Gui, Color, %BSOD_COLOR% ; define the color of the window
 
 ileft:=MonLeft+width/2-(1920/2) ; left position of the window
 itop:=MonTop+height/2-(1080/2) ; top position of the window
 
-Gui, add, picture, x%ileft% y%itop% w1920 h1080 hwndPic, % pictureNames[choice] ; add the background
+; Gui, add, picture, x%ileft% y%itop% w1920 h1080 hwndPic, % pictureNames[choice] ; add the background
+
+; PROB_MSG
+Gui, Font, s32 c%TEXT_COLOR% w200, Segoe UI ; set the text font
+utop:=itop+390 ;
+uleft:=ileft+205 ;
+Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %PROB_MSG% ; add the text
+
+; QR CODE
 qleft:=ileft+205 ;
 qtop:=itop+697 ;
 Gui, add, picture, x%qleft% y%qtop% w120 h120 hwndPic, % f ; position and add the qr code
 
+; EMOJI
 Gui, Font, s156 cWhite w500, Segoe UI ; Set the emoji font
 etop:=itop+108 ;
 eleft:=ileft+190 ;
-
 Gui, Add, Text, x%eleft% y%etop% BackgroundTrans, %EMOJI% ; Add the emoji text
-Gui, Font, s16 cWhite w900, Segoe UI ; set the url font
+
+; URL
+Gui, Font, s16 c%TEXT_COLOR% w900, Segoe UI ; set the url font
 utop:=itop+693 ;
-uleft:=ileft+855 ;
+uleft:=ileft+865 ;
 Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %URL% ; add the url text
 
-Gui, Font, s14 cWhite w900, Segoe UI ; set the stop code font
+; MORE_INFO
+Gui, Font, s14 c%TEXT_COLOR% w500, Segoe UI ; set the font
+utop:=itop+695 ;
+uleft:=ileft+343 ;
+Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %MORE_INFO% ; add the text
+
+; SUPPORT_MSG
+Gui, Font, s14 c%TEXT_COLOR% w500, Segoe UI ; set the font
+utop:=itop+760 ;
+uleft:=ileft+343 ;
+Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %SUPPORT_MSG% ; add the text
+
+
+
+; STOP_CODE_MSG
+Gui, Font, s14 c%TEXT_COLOR% w500, Segoe UI ; set the font
+utop:=itop+795 ;
+uleft:=ileft+343 ;
+Gui, Add, Text, x%uleft% y%utop% BackgroundTrans, %STOP_CODE_MSG% ; add the text
+
+; STOP CODE
+Gui, Font, s14 c%TEXT_COLOR% w900, Segoe UI ; set the stop code font
 stop:=itop+795 ;
-sleft:=ileft+418 ;
+sleft:=ileft+440 ;
 Gui, Add, Text, x%sleft% y%stop% BackgroundTrans, %STOP_CODE% ; add the font code
 
 Gui, Font, norm ; reset the fonts
