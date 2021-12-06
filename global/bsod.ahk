@@ -5,18 +5,18 @@ SetWorkingDir, %A_ScriptDir%
 LPARAM = %1% ; argument that can be passed for the length to show
 
 ;;; Settings ;;;
+DEFAULT_SHOW_LENGTH = 15 ;
 URLS := ["https://twitch.tv/products/darthminos", "https://dixper.gg/darthminos", "http://shop.darthminos.tv"] ;
 STOP_CODES := ["Y0UV3_B33N_PWN3D", "CHAT_NOT_HYPE_ENOUGH", "NEED_MOAR_POGCHAMPS"] ;
 EMOJIS := [";)", ":(", ":`(", "o.O"] ;
-DEFAULT_SHOW_LENGTH = 15 ;
-pictureNames:=["./bsod.png"] ; Pictures names, put them in the same folder as this script
+BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E", "000000"] ;
+TEXT_COLOR := "DDDDDD" ;
+
 
 PROB_MSG := "Your PC ran into a problem and needs to restart. We're `njust collecting some error info, and then we'll restart for `nyou." ;
 MORE_INFO := "For more information about this issue and possible fixes, visit"
 SUPPORT_MSG := "If you call a support person, give them this info:"
 STOP_CODE_MSG := "Stop Code:"
-TEXT_COLOR := "DDDDDD" ;
-BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E", "000000"] ;
 
 if not LPARAM {
   LPARAM := DEFAULT_SHOW_LENGTH ; DEFAULT HOW_LONG if not set
@@ -37,8 +37,6 @@ SysGet, Mon, Monitor, %Primary% ; Get the monitor info for the primary monitor
 width:=MonRight        ; Width of picture and window.
 height:=MonBottom      ; Height of picture and window.
 
-pictureNamesLen := pictureNames.Length()
-Random, choice, 1, %pictureNamesLen% ; A random image from pictureNames
 escapedURL := UrlEncode(URL) ; The url encoded url for creating the qr code
 ; download the qr code so we can use it on the window
 UrlDownloadToFile, https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=%BSOD_COLOR%&bgcolor=%TEXT_COLOR%&data=%escapedURL%&margin=5, % f := A_Temp "\bsod_qr" ;
@@ -50,7 +48,6 @@ Gui, Color, %BSOD_COLOR% ; define the color of the window
 ileft:=MonLeft+width/2-(1920/2) ; left position of the window
 itop:=MonTop+height/2-(1080/2) ; top position of the window
 
-; Gui, add, picture, x%ileft% y%itop% w1920 h1080 hwndPic, % pictureNames[choice] ; add the background
 
 ; PROB_MSG
 Gui, Font, s32 c%TEXT_COLOR% w200, Segoe UI ; set the text font
