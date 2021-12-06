@@ -15,8 +15,8 @@ PROB_MSG := "Your PC ran into a problem and needs to restart. We're `njust colle
 MORE_INFO := "For more information about this issue and possible fixes, visit"
 SUPPORT_MSG := "If you call a support person, give them this info:"
 STOP_CODE_MSG := "Stop Code:"
-TEXT_COLOR := "White" ;
-BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E"] ;
+TEXT_COLOR := "DDDDDD" ;
+BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E", "000000"] ;
 
 if not LPARAM {
   LPARAM := DEFAULT_SHOW_LENGTH ; DEFAULT HOW_LONG if not set
@@ -64,7 +64,7 @@ qtop:=itop+697 ;
 Gui, add, picture, x%qleft% y%qtop% w120 h120 hwndPic, % f ; position and add the qr code
 
 ; EMOJI
-Gui, Font, s156 cWhite w500, Segoe UI ; Set the emoji font
+Gui, Font, s156 c%TEXT_COLOR% w500, Segoe UI ; Set the emoji font
 etop:=itop+108 ;
 eleft:=ileft+190 ;
 Gui, Add, Text, x%eleft% y%etop% BackgroundTrans, %EMOJI% ; Add the emoji text
