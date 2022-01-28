@@ -11,7 +11,8 @@ if not LPARAM {
 }
 HOW_LONG := LPARAM * 1000 ;
 
-If WinExist("ahk_class R6Game") {
+If WinExist("ahk_class R6Game") 
+  or WinExist("ahk_exe PortalWars-Win64-Shipping.exe") {
   WinActivate
   Send, {LShift down}
   Sleep, %HOW_LONG%
