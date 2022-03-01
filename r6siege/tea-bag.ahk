@@ -22,8 +22,7 @@ If WinExist("ahk_class R6Game") or WinExist("ahk_exe PortalWars-Win64-Shipping.e
 }
 
 ; MsgBox, %LOOP_COUNT%
-If WinExist("ahk_class R6Game") 
-   or WinExist("ahk_exe RogueCompany.exe")
+If WinExist("ahk_exe RogueCompany.exe")
    or WinExist("ahk_exe HuntGame.exe") 
    or WinExist("ahk_exe Game.exe") {
   WinActivate
