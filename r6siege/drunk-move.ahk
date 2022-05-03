@@ -9,7 +9,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 LPARAM = %1%
 
 Keys := [ "W", "A", "S", "D", "Q", "E" ]
-EKeys:= [ "⬆", "⬅", "⬇", "➡", "↩", "↪" ]
+EKeys:= [ "🔼", "◀", "🔽", "▶", "⏪", "⏩" ]
 KeyLen := Keys.Length()
 
 if not LPARAM {
@@ -33,7 +33,9 @@ If WinExist("ahk_class R6Game")
     or WinExist("ahk_exe RogueCompany.exe") 
     or WinExist("ahk_exe HuntGame.exe") 
     or WinExist("ahk_exe Game.exe") {
-  ; ;;; Creates the overlay ;;;
+  WinActivate
+
+  ; ; ;;; Creates the overlay ;;;
   ; width:=MonRight        ; Width of picture and window.
   ; height:=MonBottom      ; Height of picture and window.
   ; tleft:=width/2 ;
@@ -42,14 +44,13 @@ If WinExist("ahk_class R6Game")
   ; Gui, +HWNDguiID  ; define the window
   ; Gui, Color, 808080 ; define the color of the window
   ; Gui, Show, hide x0 y0 w%width% h%height% ; size the window
-  ; Gui, Font, s196 cWhite w500, Segoe UI ; Set the font
-  ; Gui, Add, Text, x%tleft% y%ttop% vKeyPressLabel BackgroundTrans, ; 
+  ; Gui, Font, s200 cWhite w500, Arial ; Set the font
+  ; Gui, Add, Text, x%tleft% y%ttop% w%width% h%height% vKeyPressLabel BackgroundTrans, ; 
   ; Gui +LastFound +AlwaysOnTop +ToolWindow
   ; WinSet, TransColor, 808080 ; define the transparent color of the window
   ; Gui -Caption
   ; Gui, show ; show the window
 
-  WinActivate
   Loop {
     Random, choice, 1, %KeyLen% ;
     Random, timeLen, 1, 6 ;
@@ -58,7 +59,7 @@ If WinExist("ahk_class R6Game")
     ; MsgBox, %cKey%
     delay := 250 * timeLen ;
     ; GuiControl,,KeyPressLabel,%displayKey%
-    ws.Send("{ ""data"": { ""key"": """ + displayKey + """ }, ""event"": ""AHK_DW_KEY"" }") ;
+    ; ws.Send("{ ""data"": { ""key"": """ + displayKey + """ }, ""event"": ""AHK_DW_KEY"" }") ;
 
     Send, {%cKey% down}
     Sleep, %delay% ;
@@ -66,6 +67,6 @@ If WinExist("ahk_class R6Game")
     REMAIN_TIME += %delay%
   } Until  (REMAIN_TIME > HOW_LONG)
 
-  ; Gui, hide ; hide the window
+  Gui, hide ; hide the window
 }
 ExitApp
