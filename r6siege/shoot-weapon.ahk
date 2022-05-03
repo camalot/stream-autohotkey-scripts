@@ -12,7 +12,11 @@ if not LPARAM {
 
 HOW_LONG := LPARAM
 
-If WinExist("ahk_class R6Game") or WinExist("ahk_exe RogueCompany.exe") or WinExist("ahk_exe HuntGame.exe") or WinExist("ahk_exe Game.exe") {
+If WinExist("ahk_class R6Game") 
+or WinExist("ahk_exe RogueCompany.exe") 
+or WinExist("ahk_exe HuntGame.exe") 
+or WinExist("ahk_exe Game.exe") 
+or WinExist("ahk_exe PortalWars-Win64-Shipping.exe"){
   WinActivate
   ; make sure the mouse buttons are not swapped, as this wont work if it is
   DllCall("SwapMouseButton",int,false) ;

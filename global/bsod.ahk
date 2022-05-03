@@ -7,7 +7,7 @@ LPARAM = %1% ; argument that can be passed for the length to show
 ;;; Settings ;;;
 DEFAULT_SHOW_LENGTH = 15 ;
 URLS := ["https://twitch.tv/products/darthminos", "https://dixper.gg/darthminos", "http://shop.darthminos.tv"] ;
-STOP_CODES := ["Y0UV3_B33N_PWN3D", "CHAT_NOT_HYPE_ENOUGH", "NEED_MOAR_POGCHAMPS"] ;
+STOP_CODES := ["Y0UV3_B33N_PWN3D", "CHAT_NOT_HYPE_ENOUGH", "NEED_MOAR_EMOTES"] ;
 EMOJIS := [";)", ":(", ":`(", "o.O"] ;
 BSOD_COLORS := ["8e0d10", "0078d7", "007A46", "680D8E", "000000"] ;
 TEXT_COLOR := "DDDDDD" ;

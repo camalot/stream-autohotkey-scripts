@@ -18,7 +18,7 @@ if not LPARAM {
 HOW_LONG := LPARAM * 1000 ;
 REMAIN_TIME = 0 ;
 
-if WinExist("ahk_exe Game.exe") {
+if WinExist("ahk_exe Game.exe") or WinExist("ahk_exe PortalWars-Win64-Shipping.exe") {
   Keys := [ "W", "A", "S", "D" ]
   KeyLen := Keys.Length()
 }
@@ -32,10 +32,10 @@ If WinExist("ahk_class R6Game")
     or WinExist("ahk_exe notepad2.exe") 
     or WinExist("ahk_exe RogueCompany.exe") 
     or WinExist("ahk_exe HuntGame.exe") 
-    or WinExist("ahk_exe Game.exe") {
-  WinActivate
-
-  ; ; ;;; Creates the overlay ;;;
+    or WinExist("ahk_exe Game.exe") 
+    or WinExist("ahk_exe PortalWars-Win64-Shipping.exe") {
+    WinActivate
+  ; ;;; Creates the overlay ;;;
   ; width:=MonRight        ; Width of picture and window.
   ; height:=MonBottom      ; Height of picture and window.
   ; tleft:=width/2 ;

@@ -11,7 +11,7 @@ if not LPARAM {
 LOOP_COUNT := LPARAM
 
 ; MsgBox, %LOOP_COUNT%
-If WinExist("ahk_class R6Game") {
+If WinExist("ahk_class R6Game") or WinExist("ahk_exe PortalWars-Win64-Shipping.exe") {
   WinActivate
   Loop, %LOOP_COUNT% {
     Send, {c down}
@@ -22,8 +22,7 @@ If WinExist("ahk_class R6Game") {
 }
 
 ; MsgBox, %LOOP_COUNT%
-If WinExist("ahk_class R6Game") 
-   or WinExist("ahk_exe RogueCompany.exe")
+If WinExist("ahk_exe RogueCompany.exe")
    or WinExist("ahk_exe HuntGame.exe") 
    or WinExist("ahk_exe Game.exe") {
   WinActivate
